@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit{
 		this.songsService.getApprovalQueue().then(data => {this.songs = data; console.log(data)}).catch(err => console.log(err));
 		this.songsService.getRemovalQueue().then(data => {this.rems = data; console.log(data)}).catch(err => console.log(err));
 		this.songsService.getApprovedSongs().then(data => {this.approves = data; console.log(data)}).catch(err => console.log(err));
-		this.songsService.getApprovedSongs().then(data => {this.dels = data; console.log(data)}).catch(err => console.log(err));
+		this.songsService.getRemovedSongs().then(data => {this.dels = data; console.log(data)}).catch(err => console.log(err));
 		this.refreshState();
 	}
 
