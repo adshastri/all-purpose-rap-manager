@@ -308,7 +308,7 @@ var DashboardComponent = (function () {
         var dialogRef = this.dialog.open(PasswordDialog);
         dialogRef.afterClosed().subscribe(function (result) {
             _this.tokenManagerService.store(result.token, result.loggedIn);
-            if (!(result.token == '')) {
+            if (!(result.token == '' || result.token == null)) {
                 _this.admin = true;
             }
         });

@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit{
 	    let dialogRef = this.dialog.open(PasswordDialog);
 	    dialogRef.afterClosed().subscribe(result => {
 	    	this.tokenManagerService.store(result.token, result.loggedIn)
-	    	if (!(result.token == '')) {
+	    	if (!(result.token == '' || result.token == null)) {
 	    		this.admin = true;
 	    	}
  	    });
