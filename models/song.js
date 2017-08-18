@@ -90,16 +90,16 @@ songSchema.statics.checkForTotal = function(id, way) {
 	this.find({spotifyid: id}, function(err, result) {
 		if (way == "plus") {
 			var tot = result[0].approvals.length + result[0].nonapprovals.length;
-			if (tot == 5 && result[0].approvals.length >= 3) {
+			if (result[0].approvals.length >= 3) {
 				S.update({spotifyid: id}, {$set: {status: "2", approvals: [], nonapprovals: []}}).exec();
-			} else if (tot == 5) {
+			} else if (result[0].nonapprovals.length >= 3) {
 				S.remove({spotifyid: id});
 			} 
 		} else {
 			var tot = result[0].disapprovals.length + result[0].nondisapprovals.length;
-			if (tot == 5 && result[0].disapprovals.length >= 3) {
+			if (result[0].disapprovals.length >= 3) {
 				S.update({spotifyid: id}, {$set: {status: "5", approvals: [], nonapprovals: []}}).exec();
-			} else if (tot == 5) {
+			} else if (result[0].nondisapprovals.length >= 3) {
 				S.update({spotifyid: id}, {$set: {status: "3", approvals: [], nonapprovals: []}}).exec();
 			}
 		}
