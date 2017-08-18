@@ -1,0 +1,13 @@
+<h3>Search for a song:</h3>
+<md-input-container>
+	<input mdInput #searchBox type="text" placeholder="Song Title" (keyup)="search(searchBox.value)">
+</md-input-container>
+<div *ngFor="let song of songs | async">
+	<div class="song" style="cursor: pointer;" (click)="addToApproval(song)">
+        <h3>{{song.title}}</h3>
+        <p>{{song.artists}}</p>
+   	</div>
+</div>
+<md-dialog-actions>
+	<button md-button md-dialog-close>Back</button>
+</md-dialog-actions>

@@ -1,0 +1,11 @@
+<md-dialog-content>
+<div *ngFor="let song of playlist">
+	<div class="song" style="cursor: pointer;" (click)="addToRemoval(song)">
+        <h3>{{song.title}}</h3>
+        <p>{{song.artists}}</p>
+   	</div>
+</div>
+</md-dialog-content>
+<md-dialog-actions>
+	<button md-button md-dialog-close>Back</button>
+</md-dialog-actions>

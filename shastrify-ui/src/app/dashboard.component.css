@@ -1,0 +1,40 @@
+.admin-card {
+  height: 40px;
+}
+
+.admin-header-image-aneesh {
+  background-image: url('https://scontent.fewr1-2.fna.fbcdn.net/v/t1.0-1/c81.2.576.576/s240x240/19990602_1211450042294917_4529691436982963607_n.jpg?oh=c07af0634152f3dc609de7ce8f7cf085&oe=5A39867B');
+  background-size: cover;
+}
+
+.admin-header-image-vineeth {
+  background-image: url('https://scontent.fewr1-2.fna.fbcdn.net/v/t1.0-1/p240x240/20139867_1764268663603170_2318540232609548452_n.jpg?oh=00a449d7e161d5de752483a6cf330b8f&oe=5A29E061');
+  background-size: cover;
+}
+
+.admin-header-image-shashank {
+  background-image: url('https://scontent.fewr1-2.fna.fbcdn.net/v/t1.0-1/p240x240/15267837_905509496252217_1813902590597918452_n.jpg?oh=37e03c675a60c6f1db6b53bba8d698d8&oe=5A2E0373');
+  background-size: cover;
+}
+
+.admin-header-image-revanth {
+  background-image: url('https://scontent.fewr1-2.fna.fbcdn.net/v/t1.0-1/p240x240/19875365_721960544655758_5179151076055769010_n.jpg?oh=7ab7d5acbbd5531aaa75d2823edd10e5&oe=5A2A71E1');
+  background-size: cover;
+}
+
+.admin-header-image-aditya {
+  background-image: url('https://scontent.fewr1-2.fna.fbcdn.net/v/t31.0-1/c604.124.751.751/s240x240/14047235_494663340742071_6256025585448799763_o.jpg?oh=49de5ac8990c71e8893e101d725b7173&oe=5A273F30');
+  background-size: cover;
+}
+
+.new-song {
+	float: right;
+}
+
+.container {
+	padding: 50px;
+}
+
+.login {
+	float: right;
+}

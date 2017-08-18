@@ -1,0 +1,141 @@
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+<div class="container">
+
+	<button md-button class="login" (click)="openDialog()" *ngIf="!admin">Log in as Admin</button>
+
+	<br>
+	<br>
+	<br>
+
+	<section class="mat-typography">
+		<md-card>
+		<md-card-title>Your admins</md-card-title>
+		  <md-grid-list cols="3" rowHeight="140">
+		    <md-grid-tile>
+				<md-card class="admin-card">
+					<md-card-header>
+					    <div md-card-avatar class="admin-header-image-aneesh"></div>
+					    <md-card-title>Aneesh Deshpande</md-card-title>
+					    <md-card-subtitle>Owner</md-card-subtitle>
+				 	</md-card-header>
+				</md-card>
+		    </md-grid-tile>
+		    <md-grid-tile>
+		    	<md-card class="admin-card">
+					<md-card-header>
+					    <div md-card-avatar class="admin-header-image-vineeth"></div>
+					    <md-card-title>Vineeth Puli</md-card-title>
+					    <md-card-subtitle>Contributor</md-card-subtitle>
+				 	</md-card-header>
+				</md-card>
+		    </md-grid-tile>
+		    <md-grid-tile>
+			    <md-card class="admin-card">
+					<md-card-header>
+					    <div md-card-avatar class="admin-header-image-shashank"></div>
+					    <md-card-title>Shashank Sharma</md-card-title>
+					    <md-card-subtitle>Contributor</md-card-subtitle>
+				 	</md-card-header>
+			 	</md-card>
+		    </md-grid-tile>
+		    <md-grid-tile>
+			    <md-card class="admin-card">
+					<md-card-header>
+					    <div md-card-avatar class="admin-header-image-aditya"></div>
+					    <md-card-title>Aditya Shastri</md-card-title>
+					    <md-card-subtitle>Contributor</md-card-subtitle>
+				 	</md-card-header>
+			 	</md-card>
+		    </md-grid-tile>
+		    <md-grid-tile>
+			    <md-card class="admin-card">
+			    	<md-card-header>
+					    <div md-card-avatar class="admin-header-image-revanth"></div>
+					    <md-card-title>Revanth Korrapolu</md-card-title>
+					    <md-card-subtitle>Contributor</md-card-subtitle>
+				 	</md-card-header>
+			 	</md-card>
+		    </md-grid-tile>
+		  </md-grid-list>	
+		 </md-card>
+		 <br>
+		 <br>
+		 <md-card>
+		 	<md-card-title>Approval Queue<span class="new-song"><button md-button (click)="searchDialog()"><md-icon>add_circle</md-icon></button></span></md-card-title>
+		 	<md-list>
+		 		<md-list-item>
+	 			    <md-card *ngFor="let song of songs">
+	 			    	<md-card-header>
+	 			    		<md-card-title>{{song.title}}</md-card-title>
+	 			    		<md-card-subtitle>{{song.artists}}</md-card-subtitle>
+	 			    	</md-card-header>
+	 			    	<md-card-content>
+	 			    		<p>Approvals: {{song.approvals}}</p>
+	 			    		<p>Disapprovals: {{song.nonapprovals}}</p>
+	 			    	</md-card-content>
+	 			    	<md-card-actions *ngIf="admin">
+	 			    		<button md-button (click)="approve(song)"><md-icon>check_circle</md-icon></button>
+	 			    		<button md-button (click)="nonApprove(song)"><md-icon>cancel</md-icon></button>
+	 			    	</md-card-actions>
+	 			    </md-card>
+		 		</md-list-item>
+		 	</md-list>
+		 </md-card>
+		 <br>
+		 <br>
+		 <md-card>
+		 	<md-card-title>Approved Songs</md-card-title>
+	 		 	<md-list>
+	 		 		<md-list-item>
+	 	 			    <md-card *ngFor="let song of approves">
+	 	 			    	<md-card-header>
+	 	 			    		<md-card-title>{{song.title}}</md-card-title>
+	 	 			    		<md-card-subtitle>{{song.artists}}</md-card-subtitle>
+	 	 			    	</md-card-header>
+	 	 			    </md-card>
+	 		 		</md-list-item>
+	 		 	</md-list>
+		 </md-card>
+		 <br>
+		 <br>
+		 <md-card>
+		 	<md-card-title>Removal Queue<span class="new-song"><button md-button (click)="searchPlaylistDialog()"><md-icon>add_circle</md-icon></button></span></md-card-title>
+		 	<md-list>
+		 		<md-list-item>
+	 			    <md-card *ngFor="let song of rems">
+	 			    	<md-card-header>
+	 			    		<md-card-title>{{song.title}}</md-card-title>
+	 			    		<md-card-subtitle>{{song.artists}}</md-card-subtitle>
+	 			    	</md-card-header>
+	 			    	<md-card-content>
+	 			    		<p>Approvals: {{song.disapprovals}}</p>
+	 			    		<p>Disapprovals: {{song.nondisapprovals}}</p>
+	 			    	</md-card-content>
+	 			    	<md-card-actions *ngIf="admin">
+	 			    		<button md-button (click)="disapprove(song)"><md-icon>check_circle</md-icon></button>
+	 			    		<button md-button (click)="nonDisapprove(song)"><md-icon>cancel</md-icon></button>
+	 			    	</md-card-actions>
+	 			    </md-card>
+		 		</md-list-item>
+		 	</md-list>
+		 </md-card>
+		 <br>
+		 <br>
+		 <md-card>
+		 	<md-card-title>Removed Songs</md-card-title>
+	 		 	<md-list>
+	 		 		<md-list-item>
+	 	 			    <md-card *ngFor="let song of dels">
+	 	 			    	<md-card-header *ngIf="admin">
+	 	 			    		<md-card-title>{{song.title}}</md-card-title>
+	 	 			    		<md-card-subtitle>{{song.artists}}</md-card-subtitle>
+	 	 			    	</md-card-header>
+	 	 			    </md-card>
+	 		 		</md-list-item>
+	 		 	</md-list>
+		 </md-card>
+	</section>
+</div>
