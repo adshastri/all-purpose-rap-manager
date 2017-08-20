@@ -8,16 +8,17 @@ const songSchema = mongoose.Schema({
 	nondisapprovals: [String],
 	artists: [String],
 	title: String,
-	status: String
+	status: String,
+	url: String
 });
 
-songSchema.statics.addForApproval = function(id, name, artists, cb) {
+songSchema.statics.addForApproval = function(id, name, artists, preview_url, cb) {
 	var S = this;
 	this.find({spotifyid: id}, function(err, result) {
 		if (result.length != 0) {
 			cb(400);
 		} else {
-			var newSong = new S({spotifyid: id, title: name, artists: artists, status: "1", approvals: [], nonapprovals:[], disapprovals:[], nondisapprovals:[]});
+			var newSong = new S({spotifyid: id, url: preview_url, title: name, artists: artists, status: "1", approvals: [], nonapprovals:[], disapprovals:[], nondisapprovals:[]});
 			newSong.save();
 			cb(200);
 		}

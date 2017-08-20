@@ -69,7 +69,8 @@ getPlaylist = () => {
 							var artists = song.track.artists.map((artist) => { return artist.name; });
 							var title = song.track.name;
 							var id = song.track.id;
-							return {artists: artists, title: title, spotifyid: id, status: "3", approvals: [], nonapprovals:[], disapprovals:[], nondisapprovals:[]}
+							var preview_url = song.track.preview_url;
+							return {artists: artists, url: preview_url, title: title, spotifyid: id, status: "3", approvals: [], nonapprovals:[], disapprovals:[], nondisapprovals:[]}
 						});
 						Song.collection.insert(PLAYLIST);
 					});
@@ -111,6 +112,7 @@ router.get('/songs', (req, res, next) => {
 	if (!status) {
 		res.status(400).send('No status.');
 	} else {
+
 		Song.getByStatus(status, (list) => {
 			res.json(list);
 		});
@@ -220,7 +222,8 @@ var act = (action, id, who, cb) => {
 		request(options, (err, response, data) => {
 			var artists = data.artists.map((artist) => { return artist.name });
 			var name = data.name;
-			Song.addForApproval(id, name, artists, (finished) => {
+			var preview_url = data.preview_url;
+			Song.addForApproval(id, name, artists, preview_url, (finished) => {
 				cb(finished)
 			});
 		});

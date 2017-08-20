@@ -69,7 +69,7 @@
 		 		<md-list-item>
 	 			    <md-card *ngFor="let song of songs">
 	 			    	<md-card-header>
-	 			    		<md-card-title>{{song.title}}</md-card-title>
+	 			    		<md-card-title>{{song.title}}<span><a [href]="song.url"><md-icon>play_arrow</md-icon></a></span></md-card-title>
 	 			    		<md-card-subtitle>{{song.artists}}</md-card-subtitle>
 	 			    	</md-card-header>
 	 			    	<md-card-content>
@@ -92,7 +92,7 @@
 	 		 		<md-list-item>
 	 	 			    <md-card *ngFor="let song of approves">
 	 	 			    	<md-card-header>
-	 	 			    		<md-card-title>{{song.title}}</md-card-title>
+	 	 			    		<md-card-title>{{song.title}}<span><a [href]="song.url"><md-icon>play_arrow</md-icon></a></span></md-card-title>
 	 	 			    		<md-card-subtitle>{{song.artists}}</md-card-subtitle>
 	 	 			    	</md-card-header>
 	 	 			    </md-card>
@@ -107,7 +107,7 @@
 		 		<md-list-item>
 	 			    <md-card *ngFor="let song of rems">
 	 			    	<md-card-header>
-	 			    		<md-card-title>{{song.title}}</md-card-title>
+	 			    		<md-card-title>{{song.title}}<span><a [href]="song.url"><md-icon>play_arrow</md-icon></a></span></md-card-title>
 	 			    		<md-card-subtitle>{{song.artists}}</md-card-subtitle>
 	 			    	</md-card-header>
 	 			    	<md-card-content>
@@ -130,7 +130,7 @@
 	 		 		<md-list-item>
 	 	 			    <md-card *ngFor="let song of dels">
 	 	 			    	<md-card-header>
-	 	 			    		<md-card-title>{{song.title}}</md-card-title>
+	 	 			    		<md-card-title>{{song.title}}<span><a [href]="song.url"><md-icon>play_arrow</md-icon></a></span></md-card-title>
 	 	 			    		<md-card-subtitle>{{song.artists}}</md-card-subtitle>
 	 	 			    	</md-card-header>
 	 	 			    </md-card>
