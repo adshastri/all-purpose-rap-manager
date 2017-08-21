@@ -118,7 +118,7 @@ export class PasswordDialog {
 	checkPassword() : void {
 		this.authService.login(this.password).
 		then(data => {
-			if (data.loggedIn == "Aditya" || data.loggedIn == "Vineeth" || data.loggedIn == "Aneesh" || data.loggedIn == "Shashank" || data.loggedIn == "Revanth") {
+			if (data.loggedIn == "Aditya" || data.loggedIn == 'Jaidev' || data.loggedIn == "Vineeth" || data.loggedIn == "Aneesh" || data.loggedIn == "Shashank" || data.loggedIn == "Revanth") {
 				this.dialogRef.close({token: data.token, loggedIn: data.loggedIn});
 			} else {
 				this.incorrectPassword = true;

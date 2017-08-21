@@ -27,6 +27,11 @@
   background-size: cover;
 }
 
+.admin-header-image-jaidev {
+  background-image: url('https://scontent.fewr1-2.fna.fbcdn.net/v/t1.0-1/p240x240/19400013_1742280172456806_5334554024836277575_n.jpg?oh=04353753b4928155596781568b728a88&oe=5A351E6C');
+  background-size: cover;
+}
+
 .new-song {
 	float: right;
 }

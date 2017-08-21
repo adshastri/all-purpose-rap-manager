@@ -101,6 +101,9 @@ router.post('/login', (req, res, next) => {
     } else if (pwd == config.SHASHANK_PASSWORD) {
     	 var token = jwt.sign({admin: "1"}, config.SECRET_KEY, {expiresIn: "1h"});
     	 res.json({loggedIn: "Shashank", token: token});
+    } else if (pwd == config.JAIDEV_PASSWORD) {
+    	 var token = jwt.sign({admin: "1"}, config.SECRET_KEY, {expiresIn: "1h"});
+    	 res.json({loggedIn: "Jaidev", token: token});
     } else {
     	res.json({loggedIn: "0", token: ''});
     }
