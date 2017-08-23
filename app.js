@@ -7,7 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://' + CONFIG.MONGO.USER + ':' + CONFIG.MONGO.PASS + '@ds149433.mlab.com:49433/shastrify');
+mongoose.connect(CONFIG.MONGO_URL);
 
 var index = require('./routes/index');
 
