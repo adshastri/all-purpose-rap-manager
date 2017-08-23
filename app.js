@@ -1,4 +1,5 @@
 var express = require('express');
+var CONFIG = require('./config.js');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -6,7 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://admin:adminuser@ds149433.mlab.com:49433/shastrify');
+mongoose.connect('mongodb://' + CONFIG.MONGO.USER + ':' + CONFIG.MONGO.PASS + '@ds149433.mlab.com:49433/shastrify');
 
 var index = require('./routes/index');
 
