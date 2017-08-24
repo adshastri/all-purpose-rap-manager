@@ -148,7 +148,6 @@ router.get('/search', (req, res, next) => {
 });
 
 router.post('/songs/action', (req, res, next) => {
-	console.log(req.body)
 	var id = req.body.id;
 	var action = req.body.action;
 	var who = req.body.who;
@@ -169,17 +168,14 @@ router.post('/songs/action', (req, res, next) => {
 		}
 	} else {
 		token = token.substring(7);
-		console.log(token)
 		jwt.verify(token,config.SECRET_KEY, (err, decoded) => {
 			if (err) {
 				var status = "0";
 			} else {
 				var status = decoded.admin;
-				console.log(status)
 			}
 			var allowed = checkAllowed(action, status);
 			if (allowed) {
-				console.log('acting')
 				act(action, id, who, (finished) => {
 					if (finished == 200) {
 						res.send('Done.');
@@ -210,9 +206,6 @@ var checkAllowed = (action, status) => {
 }
 
 var act = (action, id, who, cb) => {
-	console.log(action)
-	console.log(id)
-	console.log(who)
 	if (action == "addForApproval") {
 		var options = {
 			url: 'https://api.spotify.com/v1/tracks/' + id,
@@ -246,12 +239,10 @@ var act = (action, id, who, cb) => {
 		Song.disapprove(id, who);
 		cb(200);
 	} else if (action == "nonDisapprove") {
-		console.log(id);
-		console.log(who)
 		Song.nondisapprove(id, who);
 		cb(200);
 	} else if (action == "remove") {
-		Song.remove(id);
+		Song.delete(id);
 		cb(200);
 	} else {
 		cb(400);
