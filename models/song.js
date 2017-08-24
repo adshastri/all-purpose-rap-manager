@@ -98,7 +98,7 @@ songSchema.statics.checkForTotal = function(id, way) {
 			if (result[0].approvals.length >= 4) {
 				S.update({spotifyid: id}, {$set: {status: "2", approvals: [], nonapprovals: []}}).exec();
 			} else if (result[0].nonapprovals.length >= 4 || tot == 6) {
-				S.remove({spotifyid: id}).exec();
+				S.remove({spotifyid: id}, function(err, result) {});
 			} 
 		} else {
 			var tot = result[0].disapprovals.length + result[0].nondisapprovals.length;
