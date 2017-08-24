@@ -39,7 +39,6 @@ songSchema.statics.approve = function(id, who) {
 songSchema.statics.nonapprove = function(id, who) {
 	var S = this;
 	this.find({spotifyid: id}, function(err, result) {
-		console.log(result[0]);
 		if (result[0].approvals.indexOf(who) == -1) {
 			S.update({spotifyid: id}, {$addToSet: {nonapprovals: who}}, function(err, result) {
 				S.checkForTotal(id, 'plus');
@@ -80,7 +79,7 @@ songSchema.statics.nondisapprove = function(id, who) {
 	})
 }
 
-songSchema.statics.remove = function(id) {
+songSchema.statics.delete = function(id) {
 	this.update({spotifyid: id}, {$set: {status: "6"}}).exec();
 }
 
@@ -98,6 +97,7 @@ songSchema.statics.checkForTotal = function(id, way) {
 			if (result[0].approvals.length >= 4) {
 				S.update({spotifyid: id}, {$set: {status: "2", approvals: [], nonapprovals: []}}).exec();
 			} else if (result[0].nonapprovals.length >= 4 || tot == 6) {
+				console.log(id)
 				S.remove({spotifyid: id}, function(err, result) {});
 			} 
 		} else {
