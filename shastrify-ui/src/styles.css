@@ -2,5 +2,5 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 .black-color {
-	background: linear-gradient(rgb(58, 191, 45), black)
+	background: linear-gradient(#34e89e, #0f3443)
 }
