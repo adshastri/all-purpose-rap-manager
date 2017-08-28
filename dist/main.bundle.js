@@ -223,7 +223,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<link href=\"https://fonts.googleapis.com/css?family=Roboto:300,400,500\" rel=\"stylesheet\">\n<link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\"\n      rel=\"stylesheet\">\n\n<div class=\"container\">\n\n\t<button md-button class=\"login\" (click)=\"openDialog()\" *ngIf=\"!admin\">Log in as Admin</button>\n\n\t<br>\n\t<br>\n\t<br>\n\n\t<section class=\"mat-typography\">\n\t\t<md-card>\n\t\t<md-card-title>Your admins</md-card-title>\n\t\t  <md-grid-list cols=\"3\" rowHeight=\"140\">\n\t\t    <md-grid-tile>\n\t\t\t\t<md-card class=\"admin-card\">\n\t\t\t\t\t<md-card-header>\n\t\t\t\t\t    <div md-card-avatar class=\"admin-header-image-aneesh\"></div>\n\t\t\t\t\t    <md-card-title>Aneesh Deshpande</md-card-title>\n\t\t\t\t\t    <md-card-subtitle>Owner</md-card-subtitle>\n\t\t\t\t \t</md-card-header>\n\t\t\t\t</md-card>\n\t\t    </md-grid-tile>\n\t\t    <md-grid-tile>\n\t\t    \t<md-card class=\"admin-card\">\n\t\t\t\t\t<md-card-header>\n\t\t\t\t\t    <div md-card-avatar class=\"admin-header-image-vineeth\"></div>\n\t\t\t\t\t    <md-card-title>Vineeth Puli</md-card-title>\n\t\t\t\t\t    <md-card-subtitle>Contributor</md-card-subtitle>\n\t\t\t\t \t</md-card-header>\n\t\t\t\t</md-card>\n\t\t    </md-grid-tile>\n\t\t    <md-grid-tile>\n\t\t\t    <md-card class=\"admin-card\">\n\t\t\t\t\t<md-card-header>\n\t\t\t\t\t    <div md-card-avatar class=\"admin-header-image-shashank\"></div>\n\t\t\t\t\t    <md-card-title>Shashank Sharma</md-card-title>\n\t\t\t\t\t    <md-card-subtitle>Contributor</md-card-subtitle>\n\t\t\t\t \t</md-card-header>\n\t\t\t \t</md-card>\n\t\t    </md-grid-tile>\n\t\t    <md-grid-tile>\n\t\t\t    <md-card class=\"admin-card\">\n\t\t\t\t\t<md-card-header>\n\t\t\t\t\t    <div md-card-avatar class=\"admin-header-image-aditya\"></div>\n\t\t\t\t\t    <md-card-title>Aditya Shastri</md-card-title>\n\t\t\t\t\t    <md-card-subtitle>Contributor</md-card-subtitle>\n\t\t\t\t \t</md-card-header>\n\t\t\t \t</md-card>\n\t\t    </md-grid-tile>\n\t\t    <md-grid-tile>\n\t\t\t    <md-card class=\"admin-card\">\n\t\t\t    \t<md-card-header>\n\t\t\t\t\t    <div md-card-avatar class=\"admin-header-image-revanth\"></div>\n\t\t\t\t\t    <md-card-title>Revanth Korrapolu</md-card-title>\n\t\t\t\t\t    <md-card-subtitle>Contributor</md-card-subtitle>\n\t\t\t\t \t</md-card-header>\n\t\t\t \t</md-card>\n\t\t    </md-grid-tile>\n\t\t        <md-grid-tile>\n\t\t    \t    <md-card class=\"admin-card\">\n\t\t    \t    \t<md-card-header>\n\t\t    \t\t\t    <div md-card-avatar class=\"admin-header-image-jaidev\"></div>\n\t\t    \t\t\t    <md-card-title>Jaidev Phadke</md-card-title>\n\t\t    \t\t\t    <md-card-subtitle>Critic</md-card-subtitle>\n\t\t    \t\t \t</md-card-header>\n\t\t    \t \t</md-card>\n\t\t        </md-grid-tile>\n\t\t  </md-grid-list>\t\n\t\t </md-card>\n\t\t <br>\n\t\t <br>\n\t\t <md-card>\n\t\t \t<md-card-title>Approval Queue<span class=\"new-song\"><button md-button (click)=\"searchDialog()\"><md-icon>add_circle</md-icon></button></span></md-card-title>\n\t\t \t<md-list>\n\t\t \t\t<md-list-item>\n\t \t\t\t    <md-card *ngFor=\"let song of songs\">\n\t \t\t\t    \t<md-card-header>\n\t \t\t\t    \t\t<md-card-title>{{song.title}}<span><a [href]=\"song.url\"><md-icon>play_arrow</md-icon></a></span></md-card-title>\n\t \t\t\t    \t\t<md-card-subtitle>{{song.artists}}</md-card-subtitle>\n\t \t\t\t    \t</md-card-header>\n\t \t\t\t    \t<md-card-content>\n\t \t\t\t    \t\t<p>Approvals: {{song.approvals}}</p>\n\t \t\t\t    \t\t<p>Disapprovals: {{song.nonapprovals}}</p>\n\t \t\t\t    \t</md-card-content>\n\t \t\t\t    \t<md-card-actions *ngIf=\"admin\">\n\t \t\t\t    \t\t<button md-button (click)=\"approve(song)\"><md-icon>check_circle</md-icon></button>\n\t \t\t\t    \t\t<button md-button (click)=\"nonApprove(song)\"><md-icon>cancel</md-icon></button>\n\t \t\t\t    \t</md-card-actions>\n\t \t\t\t    </md-card>\n\t\t \t\t</md-list-item>\n\t\t \t</md-list>\n\t\t </md-card>\n\t\t <br>\n\t\t <br>\n\t\t <md-card>\n\t\t \t<md-card-title>Approved Songs</md-card-title>\n\t \t\t \t<md-list>\n\t \t\t \t\t<md-list-item>\n\t \t \t\t\t    <md-card *ngFor=\"let song of approves\">\n\t \t \t\t\t    \t<md-card-header>\n\t \t \t\t\t    \t\t<md-card-title>{{song.title}}<span><a [href]=\"song.url\"><md-icon>play_arrow</md-icon></a></span></md-card-title>\n\t \t \t\t\t    \t\t<md-card-subtitle>{{song.artists}}</md-card-subtitle>\n\t \t \t\t\t    \t</md-card-header>\n\t \t \t\t\t    </md-card>\n\t \t\t \t\t</md-list-item>\n\t \t\t \t</md-list>\n\t\t </md-card>\n\t\t <br>\n\t\t <br>\n\t\t <md-card>\n\t\t \t<md-card-title>Removal Queue<span class=\"new-song\"><button md-button (click)=\"searchPlaylistDialog()\"><md-icon>add_circle</md-icon></button></span></md-card-title>\n\t\t \t<md-list>\n\t\t \t\t<md-list-item>\n\t \t\t\t    <md-card *ngFor=\"let song of rems\">\n\t \t\t\t    \t<md-card-header>\n\t \t\t\t    \t\t<md-card-title>{{song.title}}<span><a [href]=\"song.url\"><md-icon>play_arrow</md-icon></a></span></md-card-title>\n\t \t\t\t    \t\t<md-card-subtitle>{{song.artists}}</md-card-subtitle>\n\t \t\t\t    \t</md-card-header>\n\t \t\t\t    \t<md-card-content>\n\t \t\t\t    \t\t<p>Approvals: {{song.disapprovals}}</p>\n\t \t\t\t    \t\t<p>Disapprovals: {{song.nondisapprovals}}</p>\n\t \t\t\t    \t</md-card-content>\n\t \t\t\t    \t<md-card-actions *ngIf=\"admin\">\n\t \t\t\t    \t\t<button md-button (click)=\"disapprove(song)\"><md-icon>check_circle</md-icon></button>\n\t \t\t\t    \t\t<button md-button (click)=\"nonDisapprove(song)\"><md-icon>cancel</md-icon></button>\n\t \t\t\t    \t</md-card-actions>\n\t \t\t\t    </md-card>\n\t\t \t\t</md-list-item>\n\t\t \t</md-list>\n\t\t </md-card>\n\t\t <br>\n\t\t <br>\n\t\t <md-card>\n\t\t \t<md-card-title>Removed Songs</md-card-title>\n\t \t\t \t<md-list>\n\t \t\t \t\t<md-list-item>\n\t \t \t\t\t    <md-card *ngFor=\"let song of dels\">\n\t \t \t\t\t    \t<md-card-header>\n\t \t \t\t\t    \t\t<md-card-title>{{song.title}}<span><a [href]=\"song.url\"><md-icon>play_arrow</md-icon></a></span></md-card-title>\n\t \t \t\t\t    \t\t<md-card-subtitle>{{song.artists}}</md-card-subtitle>\n\t \t \t\t\t    \t</md-card-header>\n\t \t \t\t\t    </md-card>\n\t \t\t \t\t</md-list-item>\n\t \t\t \t</md-list>\n\t\t </md-card>\n\t</section>\n</div>\n"
+module.exports = "<link href=\"https://fonts.googleapis.com/css?family=Roboto:300,400,500\" rel=\"stylesheet\">\n<link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\"\n      rel=\"stylesheet\">\n\n<div class=\"container\">\n\n\t<button md-button class=\"login\" (click)=\"openDialog()\" *ngIf=\"!admin\">Log in as Admin</button>\n\n\t<br>\n\t<br>\n\t<br>\n\n\t<section class=\"mat-typography\">\n\t\t<md-card>\n\t\t<md-card-title>Your admins</md-card-title>\n\t\t  <md-grid-list cols=\"3\" rowHeight=\"140\">\n\t\t    <md-grid-tile>\n\t\t\t\t<md-card class=\"admin-card\">\n\t\t\t\t\t<md-card-header>\n\t\t\t\t\t    <div md-card-avatar class=\"admin-header-image-aneesh\"></div>\n\t\t\t\t\t    <md-card-title>Aneesh Deshpande</md-card-title>\n\t\t\t\t\t    <md-card-subtitle>Owner</md-card-subtitle>\n\t\t\t\t \t</md-card-header>\n\t\t\t\t</md-card>\n\t\t    </md-grid-tile>\n\t\t    <md-grid-tile>\n\t\t    \t<md-card class=\"admin-card\">\n\t\t\t\t\t<md-card-header>\n\t\t\t\t\t    <div md-card-avatar class=\"admin-header-image-vineeth\"></div>\n\t\t\t\t\t    <md-card-title>Vineeth Puli</md-card-title>\n\t\t\t\t\t    <md-card-subtitle>Contributor</md-card-subtitle>\n\t\t\t\t \t</md-card-header>\n\t\t\t\t</md-card>\n\t\t    </md-grid-tile>\n\t\t    <md-grid-tile>\n\t\t\t    <md-card class=\"admin-card\">\n\t\t\t\t\t<md-card-header>\n\t\t\t\t\t    <div md-card-avatar class=\"admin-header-image-shashank\"></div>\n\t\t\t\t\t    <md-card-title>Shashank Sharma</md-card-title>\n\t\t\t\t\t    <md-card-subtitle>Contributor</md-card-subtitle>\n\t\t\t\t \t</md-card-header>\n\t\t\t \t</md-card>\n\t\t    </md-grid-tile>\n\t\t    <md-grid-tile>\n\t\t\t    <md-card class=\"admin-card\">\n\t\t\t\t\t<md-card-header>\n\t\t\t\t\t    <div md-card-avatar class=\"admin-header-image-aditya\"></div>\n\t\t\t\t\t    <md-card-title>Aditya Shastri</md-card-title>\n\t\t\t\t\t    <md-card-subtitle>Contributor</md-card-subtitle>\n\t\t\t\t \t</md-card-header>\n\t\t\t \t</md-card>\n\t\t    </md-grid-tile>\n\t\t    <md-grid-tile>\n\t\t\t    <md-card class=\"admin-card\">\n\t\t\t    \t<md-card-header>\n\t\t\t\t\t    <div md-card-avatar class=\"admin-header-image-revanth\"></div>\n\t\t\t\t\t    <md-card-title>Revanth Korrapolu</md-card-title>\n\t\t\t\t\t    <md-card-subtitle>Contributor</md-card-subtitle>\n\t\t\t\t \t</md-card-header>\n\t\t\t \t</md-card>\n\t\t    </md-grid-tile>\n\t\t        <md-grid-tile>\n\t\t    \t    <md-card class=\"admin-card\">\n\t\t    \t    \t<md-card-header>\n\t\t    \t\t\t    <div md-card-avatar class=\"admin-header-image-jaidev\"></div>\n\t\t    \t\t\t    <md-card-title>Jaidev Phadke</md-card-title>\n\t\t    \t\t\t    <md-card-subtitle>Critic</md-card-subtitle>\n\t\t    \t\t \t</md-card-header>\n\t\t    \t \t</md-card>\n\t\t        </md-grid-tile>\n\t\t  </md-grid-list>\t\n\t\t </md-card>\n\t\t <br>\n\t\t <br>\n\t\t <md-card>\n\t\t \t<md-card-title>Approval Queue<span class=\"new-song\"><button md-button (click)=\"searchDialog()\"><md-icon>add_circle</md-icon></button></span></md-card-title>\n\t\t \t<md-list>\n\t\t \t\t<md-list-item>\n\t \t\t\t    <md-card *ngFor=\"let song of songs\">\n\t \t\t\t    \t<md-card-header>\n\t \t\t\t    \t\t<md-card-title>{{song.title}}<span><a [href]=\"song.url\"><md-icon>play_arrow</md-icon></a></span></md-card-title>\n\t \t\t\t    \t\t<md-card-subtitle>{{song.artists}}</md-card-subtitle>\n\t \t\t\t    \t</md-card-header>\n\t \t\t\t    \t<md-card-content>\n\t \t\t\t    \t\t<p>Approvals: {{song.approvals}}</p>\n\t \t\t\t    \t\t<p>Disapprovals: {{song.nonapprovals}}</p>\n\t \t\t\t    \t</md-card-content>\n\t \t\t\t    \t<md-card-actions *ngIf=\"admin\">\n\t \t\t\t    \t\t<button md-button (click)=\"approve(song)\"><md-icon>check_circle</md-icon></button>\n\t \t\t\t    \t\t<button md-button (click)=\"nonApprove(song)\"><md-icon>cancel</md-icon></button>\n\t \t\t\t    \t</md-card-actions>\n\t \t\t\t    </md-card>\n\t\t \t\t</md-list-item>\n\t\t \t</md-list>\n\t\t </md-card>\n\t\t <br>\n\t\t <br>\n\t\t <md-card>\n\t\t \t<md-card-title>Approved Songs</md-card-title>\n\t \t\t \t<md-list>\n\t \t\t \t\t<md-list-item>\n\t \t \t\t\t    <md-card *ngFor=\"let song of approves\">\n\t \t \t\t\t    \t<md-card-header>\n\t \t \t\t\t    \t\t<md-card-title>{{song.title}}<span><a [href]=\"song.url\"><md-icon>play_arrow</md-icon></a></span></md-card-title>\n\t \t \t\t\t    \t\t<md-card-subtitle>{{song.artists}}</md-card-subtitle>\n\t \t \t\t\t    \t</md-card-header>\n\t \t \t\t\t    \t<md-card-actions *ngIf=\"isOwner()\">\n\t \t \t\t\t    \t\t<button md-button (click)=\"add(song)\">Mark as done<md-icon>archive</md-icon></button>\n\t \t \t\t\t    \t</md-card-actions>\n\t \t \t\t\t    </md-card>\n\t \t\t \t\t</md-list-item>\n\t \t\t \t</md-list>\n\t\t </md-card>\n\t\t <br>\n\t\t <br>\n\t\t <md-card>\n\t\t \t<md-card-title>Removal Queue<span class=\"new-song\"><button md-button (click)=\"searchPlaylistDialog()\"><md-icon>add_circle</md-icon></button></span></md-card-title>\n\t\t \t<md-list>\n\t\t \t\t<md-list-item>\n\t \t\t\t    <md-card *ngFor=\"let song of rems\">\n\t \t\t\t    \t<md-card-header>\n\t \t\t\t    \t\t<md-card-title>{{song.title}}<span><a [href]=\"song.url\"><md-icon>play_arrow</md-icon></a></span></md-card-title>\n\t \t\t\t    \t\t<md-card-subtitle>{{song.artists}}</md-card-subtitle>\n\t \t\t\t    \t</md-card-header>\n\t \t\t\t    \t<md-card-content>\n\t \t\t\t    \t\t<p>Approvals: {{song.disapprovals}}</p>\n\t \t\t\t    \t\t<p>Disapprovals: {{song.nondisapprovals}}</p>\n\t \t\t\t    \t</md-card-content>\n\t \t\t\t    \t<md-card-actions *ngIf=\"admin\">\n\t \t\t\t    \t\t<button md-button (click)=\"disapprove(song)\"><md-icon>check_circle</md-icon></button>\n\t \t\t\t    \t\t<button md-button (click)=\"nonDisapprove(song)\"><md-icon>cancel</md-icon></button>\n\t \t\t\t    \t</md-card-actions>\n\t \t\t\t    </md-card>\n\t\t \t\t</md-list-item>\n\t\t \t</md-list>\n\t\t </md-card>\n\t\t <br>\n\t\t <br>\n\t\t <md-card>\n\t\t \t<md-card-title>Removed Songs</md-card-title>\n\t \t\t \t<md-list>\n\t \t\t \t\t<md-list-item>\n\t \t \t\t\t    <md-card *ngFor=\"let song of dels\">\n\t \t \t\t\t    \t<md-card-header>\n\t \t \t\t\t    \t\t<md-card-title>{{song.title}}<span><a [href]=\"song.url\"><md-icon>play_arrow</md-icon></a></span></md-card-title>\n\t \t \t\t\t    \t\t<md-card-subtitle>{{song.artists}}</md-card-subtitle>\n\t \t \t\t\t    \t</md-card-header>\n\t \t \t\t\t    \t<md-card-actions *ngIf=\"isOwner()\">\n\t \t \t\t\t    \t\t<button md-button (click)=\"remove(song)\">Mark as done<md-icon>archive</md-icon></button>\n\t \t \t\t\t    \t</md-card-actions>\n\t \t \t\t\t    </md-card>\n\t \t\t \t\t</md-list-item>\n\t \t\t \t</md-list>\n\t\t </md-card>\n\t</section>\n</div>\n"
 
 /***/ }),
 
@@ -286,15 +286,14 @@ var DashboardComponent = (function () {
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.admin = false;
-        this.songsService.getApprovalQueue().then(function (data) { _this.songs = data; console.log(data); }).catch(function (err) { return console.log(err); });
-        this.songsService.getRemovalQueue().then(function (data) { _this.rems = data; console.log(data); }).catch(function (err) { return console.log(err); });
-        this.songsService.getApprovedSongs().then(function (data) { _this.approves = data; console.log(data); }).catch(function (err) { return console.log(err); });
-        this.songsService.getRemovedSongs().then(function (data) { _this.dels = data; console.log(data); }).catch(function (err) { return console.log(err); });
+        this.songsService.getApprovalQueue().then(function (data) { _this.songs = data; }).catch(function (err) { return console.log(err); });
+        this.songsService.getRemovalQueue().then(function (data) { _this.rems = data; }).catch(function (err) { return console.log(err); });
+        this.songsService.getApprovedSongs().then(function (data) { _this.approves = data; }).catch(function (err) { return console.log(err); });
+        this.songsService.getRemovedSongs().then(function (data) { _this.dels = data; }).catch(function (err) { return console.log(err); });
         this.refreshState();
     };
     DashboardComponent.prototype.refreshState = function () {
         this.token = this.tokenManagerService.retrieveToken();
-        console.log(this.token);
         if (!(this.token == '' || this.token == null)) {
             this.admin = true;
         }
@@ -310,6 +309,7 @@ var DashboardComponent = (function () {
             _this.tokenManagerService.store(result.token, result.loggedIn);
             if (!(result.token == '' || result.token == null)) {
                 _this.admin = true;
+                _this.who = result.loggedIn;
             }
         });
     };
@@ -332,14 +332,15 @@ var DashboardComponent = (function () {
         this.refreshState();
         this.songsService.approve(song.spotifyid, this.who, this.token);
         this.songsService.getApprovalQueue().then(function (data) { return _this.songs = data; }).catch(function (err) { return console.log(err); });
+        this.refreshState();
         this.ref.detectChanges();
     };
     DashboardComponent.prototype.nonApprove = function (song) {
         var _this = this;
         this.refreshState();
-        console.log(song);
         this.songsService.nonApprove(song.spotifyid, this.who, this.token);
         this.songsService.getApprovalQueue().then(function (data) { return _this.songs = data; }).catch(function (err) { return console.log(err); });
+        this.refreshState();
         this.ref.detectChanges();
     };
     DashboardComponent.prototype.disapprove = function (song) {
@@ -347,6 +348,7 @@ var DashboardComponent = (function () {
         this.refreshState();
         this.songsService.disapprove(song.spotifyid, this.who, this.token);
         this.songsService.getRemovalQueue().then(function (data) { return _this.rems = data; }).catch(function (err) { return console.log(err); });
+        this.refreshState();
         this.ref.detectChanges();
     };
     DashboardComponent.prototype.nonDisapprove = function (song) {
@@ -354,7 +356,25 @@ var DashboardComponent = (function () {
         this.refreshState();
         this.songsService.nonDisapprove(song.spotifyid, this.who, this.token);
         this.songsService.getRemovalQueue().then(function (data) { return _this.rems = data; }).catch(function (err) { return console.log(err); });
+        this.refreshState();
         this.ref.detectChanges();
+    };
+    DashboardComponent.prototype.add = function (song) {
+        var _this = this;
+        this.refreshState();
+        this.songsService.add(song.spotifyid, this.token);
+        this.songsService.getApprovedSongs().then(function (data) { _this.approves = data; }).catch(function (err) { return console.log(err); });
+        this.refreshState();
+    };
+    DashboardComponent.prototype.remove = function (song) {
+        var _this = this;
+        this.refreshState();
+        this.songsService.remove(song.spotifyid, this.token);
+        this.songsService.getRemovedSongs().then(function (data) { _this.dels = data; }).catch(function (err) { return console.log(err); });
+        this.refreshState();
+    };
+    DashboardComponent.prototype.isOwner = function () {
+        return this.admin && this.who == "Aneesh";
     };
     return DashboardComponent;
 }());
@@ -417,7 +437,6 @@ var AddDialog = (function () {
         this.searchTerms.next(title);
     };
     AddDialog.prototype.addToApproval = function (song) {
-        console.log(song);
         this.songsService.addToApproval(song.spotifyid);
         this.dialogRef.close();
     };
@@ -439,7 +458,7 @@ var RemoveDialog = (function () {
     }
     RemoveDialog.prototype.ngOnInit = function () {
         var _this = this;
-        this.songsService.getPlaylist().then(function (data) { _this.playlist = data; console.log(data); }).catch(function (err) { return console.log(err); });
+        this.songsService.getPlaylist().then(function (data) { _this.playlist = data; }).catch(function (err) { return console.log(err); });
     };
     RemoveDialog.prototype.addToRemoval = function (song) {
         this.songsService.addToRemoval(song.spotifyid);
@@ -507,7 +526,7 @@ var SongsService = (function () {
         return this.http.get(this.url + 'songs?status=1').toPromise().then(function (response) { return response; }).catch(function (err) { return err; });
     };
     SongsService.prototype.search = function (string) {
-        return this.http.get(this.url + 'search?string=' + string).map(function (response) { console.log(response); return response; });
+        return this.http.get(this.url + 'search?string=' + string).map(function (response) { return response; });
     };
     SongsService.prototype.addToApproval = function (id) {
         this.http.post(this.url + 'songs/action', { action: "addForApproval", id: id }).subscribe();
@@ -524,6 +543,12 @@ var SongsService = (function () {
     SongsService.prototype.nonDisapprove = function (id, who, token) {
         this.http.post(this.url + 'songs/action', { action: "nonDisapprove", id: id, who: who }, { headers: new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]().set('Authorization', 'Bearer ' + token) }).subscribe();
     };
+    SongsService.prototype.add = function (id, token) {
+        this.http.post(this.url + '/songs/action', { action: "add", id: id }, { headers: new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]().set('Authorization', 'Bearer ' + token) }).subscribe();
+    };
+    SongsService.prototype.remove = function (id, token) {
+        this.http.post(this.url + '/songs/action', { action: "remove", id: id }, { headers: new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]().set('Authorization', 'Bearer ' + token) }).subscribe();
+    };
     SongsService.prototype.getRemovalQueue = function () {
         return this.http.get(this.url + 'songs?status=4').toPromise().then(function (response) { return response; }).catch(function (err) { return err; });
     };
@@ -531,13 +556,13 @@ var SongsService = (function () {
         this.http.post(this.url + 'songs/action', { action: "addForDisapproval", id: id }).subscribe();
     };
     SongsService.prototype.getPlaylist = function () {
-        return this.http.get(this.url + 'songs?status=3').toPromise().then(function (response) { console.log(response); return response; }).catch(function (err) { return err; });
+        return this.http.get(this.url + 'songs?status=3').toPromise().then(function (response) { return response; }).catch(function (err) { return err; });
     };
     SongsService.prototype.getApprovedSongs = function () {
-        return this.http.get(this.url + 'songs?status=2').toPromise().then(function (response) { console.log(response); return response; }).catch(function (err) { return err; });
+        return this.http.get(this.url + 'songs?status=2').toPromise().then(function (response) { return response; }).catch(function (err) { return err; });
     };
     SongsService.prototype.getRemovedSongs = function () {
-        return this.http.get(this.url + 'songs?status=5').toPromise().then(function (response) { console.log(response); return response; }).catch(function (err) { return err; });
+        return this.http.get(this.url + 'songs?status=5').toPromise().then(function (response) { return response; }).catch(function (err) { return err; });
     };
     return SongsService;
 }());
