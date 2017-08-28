@@ -544,10 +544,10 @@ var SongsService = (function () {
         this.http.post(this.url + 'songs/action', { action: "nonDisapprove", id: id, who: who }, { headers: new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]().set('Authorization', 'Bearer ' + token) }).subscribe();
     };
     SongsService.prototype.add = function (id, token) {
-        this.http.post(this.url + '/songs/action', { action: "add", id: id }, { headers: new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]().set('Authorization', 'Bearer ' + token) }).subscribe();
+        this.http.post(this.url + 'songs/action', { action: "add", id: id }, { headers: new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]().set('Authorization', 'Bearer ' + token) }).subscribe();
     };
     SongsService.prototype.remove = function (id, token) {
-        this.http.post(this.url + '/songs/action', { action: "remove", id: id }, { headers: new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]().set('Authorization', 'Bearer ' + token) }).subscribe();
+        this.http.post(this.url + 'songs/action', { action: "remove", id: id }, { headers: new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]().set('Authorization', 'Bearer ' + token) }).subscribe();
     };
     SongsService.prototype.getRemovalQueue = function () {
         return this.http.get(this.url + 'songs?status=4').toPromise().then(function (response) { return response; }).catch(function (err) { return err; });

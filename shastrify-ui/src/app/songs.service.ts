@@ -41,11 +41,11 @@ export class SongsService {
   }
 
   add(id: String, token : String) : void {
-    this.http.post(this.url+'/songs/action', {action: "add", id: id}, {headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)}).subscribe();
+    this.http.post(this.url+'songs/action', {action: "add", id: id}, {headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)}).subscribe();
   }
 
   remove(id: String, token : String) : void {
-    this.http.post(this.url+'/songs/action', {action: "remove", id: id}, {headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)}).subscribe();
+    this.http.post(this.url+'songs/action', {action: "remove", id: id}, {headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)}).subscribe();
   }
 
   getRemovalQueue(): any {
