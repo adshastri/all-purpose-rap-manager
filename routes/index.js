@@ -196,7 +196,7 @@ var checkAllowed = (action, status) => {
 		addForApproval: ["0", "1", "2"],
 		approve: ["1", "2"],
 		nonApprove: ["1", "2"],
-		add: ["1"],
+		add: ["2"],
 		addForDisapproval: ["0", "1", "2"],
 		disapprove: ["1", "2"],
 		nonDisapprove: ["1", "2"],
