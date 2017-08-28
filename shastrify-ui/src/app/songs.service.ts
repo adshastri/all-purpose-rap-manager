@@ -17,7 +17,7 @@ export class SongsService {
   }
 
   search(string) : Observable<any[]> {
-  	return this.http.get(this.url+'search?string='+string).map(response => {console.log(response);return response});
+  	return this.http.get(this.url+'search?string='+string).map(response => {return response});
   }
 
   addToApproval(id : String) : void {
@@ -40,6 +40,14 @@ export class SongsService {
   	this.http.post(this.url+'songs/action', {action: "nonDisapprove", id: id, who: who}, {headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)}).subscribe();
   }
 
+  add(id: String, token : String) : void {
+    this.http.post(this.url+'/songs/action', {action: "add", id: id}, {headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)}).subscribe();
+  }
+
+  remove(id: String, token : String) : void {
+    this.http.post(this.url+'/songs/action', {action: "remove", id: id}, {headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)}).subscribe();
+  }
+
   getRemovalQueue(): any {
   	return this.http.get(this.url+'songs?status=4').toPromise().then(response => response).catch(err => err);
   }
@@ -49,15 +57,15 @@ export class SongsService {
   }
 
   getPlaylist(): any {
-  	return this.http.get(this.url+'songs?status=3').toPromise().then(response => {console.log(response);return response}).catch(err => err);
+  	return this.http.get(this.url+'songs?status=3').toPromise().then(response => {return response}).catch(err => err);
   }
 
   getApprovedSongs(): any {
-  	return this.http.get(this.url+'songs?status=2').toPromise().then(response => {console.log(response);return response}).catch(err => err);
+  	return this.http.get(this.url+'songs?status=2').toPromise().then(response => {return response}).catch(err => err);
   }
 
   getRemovedSongs(): any {
-  	return this.http.get(this.url+'songs?status=5').toPromise().then(response => {console.log(response);return response}).catch(err => err);
+  	return this.http.get(this.url+'songs?status=5').toPromise().then(response => {return response}).catch(err => err);
   }
 
 }

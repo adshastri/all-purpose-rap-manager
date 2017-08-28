@@ -104,6 +104,9 @@
 	 	 			    		<md-card-title>{{song.title}}<span><a [href]="song.url"><md-icon>play_arrow</md-icon></a></span></md-card-title>
 	 	 			    		<md-card-subtitle>{{song.artists}}</md-card-subtitle>
 	 	 			    	</md-card-header>
+	 	 			    	<md-card-actions *ngIf="isOwner()">
+	 	 			    		<button md-button (click)="add(song)">Mark as done<md-icon>archive</md-icon></button>
+	 	 			    	</md-card-actions>
 	 	 			    </md-card>
 	 		 		</md-list-item>
 	 		 	</md-list>
@@ -142,6 +145,9 @@
 	 	 			    		<md-card-title>{{song.title}}<span><a [href]="song.url"><md-icon>play_arrow</md-icon></a></span></md-card-title>
 	 	 			    		<md-card-subtitle>{{song.artists}}</md-card-subtitle>
 	 	 			    	</md-card-header>
+	 	 			    	<md-card-actions *ngIf="isOwner()">
+	 	 			    		<button md-button (click)="remove(song)">Mark as done<md-icon>archive</md-icon></button>
+	 	 			    	</md-card-actions>
 	 	 			    </md-card>
 	 		 		</md-list-item>
 	 		 	</md-list>

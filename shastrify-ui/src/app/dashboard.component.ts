@@ -35,16 +35,15 @@ export class DashboardComponent implements OnInit{
 
 	ngOnInit() : void {
 		this.admin = false;
-		this.songsService.getApprovalQueue().then(data => {this.songs = data; console.log(data)}).catch(err => console.log(err));
-		this.songsService.getRemovalQueue().then(data => {this.rems = data; console.log(data)}).catch(err => console.log(err));
-		this.songsService.getApprovedSongs().then(data => {this.approves = data; console.log(data)}).catch(err => console.log(err));
-		this.songsService.getRemovedSongs().then(data => {this.dels = data; console.log(data)}).catch(err => console.log(err));
+		this.songsService.getApprovalQueue().then(data => {this.songs = data}).catch(err => console.log(err));
+		this.songsService.getRemovalQueue().then(data => {this.rems = data}).catch(err => console.log(err));
+		this.songsService.getApprovedSongs().then(data => {this.approves = data}).catch(err => console.log(err));
+		this.songsService.getRemovedSongs().then(data => {this.dels = data}).catch(err => console.log(err));
 		this.refreshState();
 	}
 
 	private refreshState() {
 		this.token = this.tokenManagerService.retrieveToken();
-		console.log(this.token);
 		if (!(this.token=='' || this.token==null)) {
 			this.admin = true;
 		} else {
@@ -59,6 +58,7 @@ export class DashboardComponent implements OnInit{
 	    	this.tokenManagerService.store(result.token, result.loggedIn)
 	    	if (!(result.token == '' || result.token == null)) {
 	    		this.admin = true;
+	    		this.who = result.loggedIn;		
 	    	}
  	    });
 	}
@@ -81,14 +81,15 @@ export class DashboardComponent implements OnInit{
 		this.refreshState();
 		this.songsService.approve(song.spotifyid, this.who, this.token);
 		this.songsService.getApprovalQueue().then(data => this.songs = data).catch(err => console.log(err));
+		this.refreshState();
 		this.ref.detectChanges();
 	}
 
 	nonApprove(song : any) {
 		this.refreshState();
-		console.log(song);
 		this.songsService.nonApprove(song.spotifyid, this.who, this.token);
 		this.songsService.getApprovalQueue().then(data => this.songs = data).catch(err => console.log(err));
+		this.refreshState();
 		this.ref.detectChanges();
 	}
 
@@ -96,6 +97,7 @@ export class DashboardComponent implements OnInit{
 		this.refreshState();
 		this.songsService.disapprove(song.spotifyid, this.who, this.token);
 		this.songsService.getRemovalQueue().then(data => this.rems = data).catch(err => console.log(err));
+		this.refreshState();
 		this.ref.detectChanges();
 	}
 
@@ -103,7 +105,26 @@ export class DashboardComponent implements OnInit{
 		this.refreshState();
 		this.songsService.nonDisapprove(song.spotifyid, this.who, this.token);
 		this.songsService.getRemovalQueue().then(data => this.rems = data).catch(err => console.log(err));
+		this.refreshState();
 		this.ref.detectChanges();
+	}
+
+	add(song: any) {
+		this.refreshState();
+		this.songsService.add(song.spotifyid, this.token);
+		this.songsService.getApprovedSongs().then(data => {this.approves = data}).catch(err => console.log(err));
+		this.refreshState();
+	}
+
+	remove(song: any) {
+		this.refreshState();
+		this.songsService.remove(song.spotifyid, this.token);
+		this.songsService.getRemovedSongs().then(data => {this.dels = data}).catch(err => console.log(err));
+		this.refreshState();
+	}
+
+	isOwner() {
+		return this.admin && this.who=="Aneesh";
 	}
 }
 
@@ -158,7 +179,6 @@ export class AddDialog implements OnInit {
 	}
 
 	addToApproval(song : any) {
-		console.log(song)
 		this.songsService.addToApproval(song.spotifyid);
 		this.dialogRef.close();
 	}
@@ -177,7 +197,7 @@ export class RemoveDialog implements OnInit {
 	searchTerms = new Subject<string>();
 
 	ngOnInit() : void {
-		this.songsService.getPlaylist().then(data => {this.playlist = data; console.log(data)}).catch(err => console.log(err));
+		this.songsService.getPlaylist().then(data => {this.playlist = data}).catch(err => console.log(err));
 	}
 
 	addToRemoval(song : any) {
