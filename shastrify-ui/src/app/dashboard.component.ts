@@ -32,14 +32,20 @@ export class DashboardComponent implements OnInit{
 	who : String;
 	token : String;
 	dels: any[];
+	filter : String;
 
 	ngOnInit() : void {
 		this.admin = false;
-		this.songsService.getApprovalQueue().then(data => {this.songs = data}).catch(err => console.log(err));
-		this.songsService.getRemovalQueue().then(data => {this.rems = data}).catch(err => console.log(err));
-		this.songsService.getApprovedSongs().then(data => {this.approves = data}).catch(err => console.log(err));
-		this.songsService.getRemovedSongs().then(data => {this.dels = data}).catch(err => console.log(err));
+		this.filter = "all";
+		this.getData();
 		this.refreshState();
+	}
+
+	getData() : void {
+		this.songsService.getApprovalQueue().then(data => {this.setSongs(data)}).catch(err => console.log(err));
+		this.songsService.getRemovalQueue().then(data => {this.setRems(data)}).catch(err => console.log(err));
+		this.songsService.getApprovedSongs().then(data => {this.setApproves(data)}).catch(err => console.log(err));
+		this.songsService.getRemovedSongs().then(data => {this.setDels(data)}).catch(err => console.log(err));
 	}
 
 	private refreshState() {
@@ -50,6 +56,34 @@ export class DashboardComponent implements OnInit{
 			this.admin = false;
 		}
 		this.who = this.tokenManagerService.retrieveMe();
+	}
+
+	setSongs(data: any[]) : void {
+		if (this.filter == "all") {
+			this.songs = data;
+		} else {
+			this.songs = data.filter(item => {
+				return (item.approvals.indexOf(this.who) == -1 && item.nonapprovals.indexOf(this.who) == -1)
+			})
+		}
+	}
+
+	setRems(data: any[]) : void {
+		if (this.filter == "all") {
+			this.rems = data;
+		} else {
+			this.rems = data.filter(item => {
+				return (item.disapprovals.indexOf(this.who) == -1 && item.nondisapprovals.indexOf(this.who) == -1)
+			})
+		}
+	}
+
+	setApproves(data: any[]) : void {
+		this.approves = data;
+	}
+
+	setDels(data: any[]) : void {
+		this.dels = data;
 	}
 
 	openDialog() {
@@ -66,61 +100,55 @@ export class DashboardComponent implements OnInit{
 	searchDialog() {
 		let dialogRef = this.dialog.open(AddDialog);
 	    dialogRef.afterClosed().subscribe(result => {
-	    	this.songsService.getApprovalQueue().then(data => this.songs = data).catch(err => console.log(err));
+	    	this.songsService.getApprovalQueue().then(data => this.setSongs(data)).catch(err => console.log(err));
  	    });
 	}
 
 	searchPlaylistDialog() {
 		let dialogRef = this.dialog.open(RemoveDialog);
 	    dialogRef.afterClosed().subscribe(result => {
-	    	this.songsService.getRemovalQueue().then(data => this.rems = data).catch(err => console.log(err));
+	    	this.songsService.getRemovalQueue().then(data => this.setRems(data)).catch(err => console.log(err));
  	    });
 	}
 
 	approve(song : any) {
 		this.refreshState();
 		this.songsService.approve(song.spotifyid, this.who, this.token);
-		this.songsService.getApprovalQueue().then(data => this.songs = data).catch(err => console.log(err));
-		this.refreshState();
+		this.songsService.getApprovalQueue().then(data => this.setSongs(data)).catch(err => console.log(err));
 		this.ref.detectChanges();
 	}
 
 	nonApprove(song : any) {
 		this.refreshState();
 		this.songsService.nonApprove(song.spotifyid, this.who, this.token);
-		this.songsService.getApprovalQueue().then(data => this.songs = data).catch(err => console.log(err));
-		this.refreshState();
+		this.songsService.getApprovalQueue().then(data => this.setSongs(data)).catch(err => console.log(err));
 		this.ref.detectChanges();
 	}
 
 	disapprove(song : any) {
 		this.refreshState();
 		this.songsService.disapprove(song.spotifyid, this.who, this.token);
-		this.songsService.getRemovalQueue().then(data => this.rems = data).catch(err => console.log(err));
-		this.refreshState();
+		this.songsService.getRemovalQueue().then(data => this.setRems(data)).catch(err => console.log(err));
 		this.ref.detectChanges();
 	}
 
 	nonDisapprove(song : any) {
 		this.refreshState();
 		this.songsService.nonDisapprove(song.spotifyid, this.who, this.token);
-		this.songsService.getRemovalQueue().then(data => this.rems = data).catch(err => console.log(err));
-		this.refreshState();
+		this.songsService.getRemovalQueue().then(data => this.setRems(data)).catch(err => console.log(err));
 		this.ref.detectChanges();
 	}
 
 	add(song: any) {
 		this.refreshState();
 		this.songsService.add(song.spotifyid, this.token);
-		this.songsService.getApprovedSongs().then(data => {this.approves = data}).catch(err => console.log(err));
-		this.refreshState();
+		this.songsService.getApprovedSongs().then(data => {this.setApproves(data)}).catch(err => console.log(err));
 	}
 
 	remove(song: any) {
 		this.refreshState();
 		this.songsService.remove(song.spotifyid, this.token);
-		this.songsService.getRemovedSongs().then(data => {this.dels = data}).catch(err => console.log(err));
-		this.refreshState();
+		this.songsService.getRemovedSongs().then(data => {this.setDels(data)}).catch(err => console.log(err));
 	}
 
 	isOwner() {

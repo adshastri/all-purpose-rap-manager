@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdButtonModule, MdGridListModule, MdCardModule, MdIconModule, MdDialogModule, MdInputModule } from '@angular/material';
+import { MdButtonModule, MdGridListModule, MdCardModule, MdIconModule, MdDialogModule, MdInputModule, MdRadioModule } from '@angular/material';
 import { NgModule, ChangeDetectorRef } from '@angular/core';
 import { RouterModule }   from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -34,6 +34,7 @@ import { DashboardComponent, PasswordDialog, AddDialog, RemoveDialog } from './d
     MdInputModule,
     FormsModule,
     HttpClientModule,
+    MdRadioModule,
     RouterModule.forRoot([
       {
         path: 'dashboard',

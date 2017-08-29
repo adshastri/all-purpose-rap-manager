@@ -5,7 +5,10 @@
 <div class="container">
 
 	<button md-button class="login" (click)="openDialog()" *ngIf="!admin">Log in as Admin</button>
-
+	<md-radio-group (change)="getData()" [(ngModel)]="filter" *ngIf="admin" class="login">
+		<md-radio-button value="all">All songs</md-radio-button>
+		<md-radio-button value="mine">Only unvoted songs</md-radio-button>
+	</md-radio-group>
 	<br>
 	<br>
 	<br>
