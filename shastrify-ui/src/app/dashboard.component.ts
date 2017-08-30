@@ -33,6 +33,7 @@ export class DashboardComponent implements OnInit{
 	token : String;
 	dels: any[];
 	filter : String;
+	status : String;
 
 	ngOnInit() : void {
 		this.admin = false;
@@ -56,6 +57,7 @@ export class DashboardComponent implements OnInit{
 			this.admin = false;
 		}
 		this.who = this.tokenManagerService.retrieveMe();
+		this.status = this.tokenManagerService.retrieveStatus();
 	}
 
 	setSongs(data: any[]) : void {
@@ -89,10 +91,11 @@ export class DashboardComponent implements OnInit{
 	openDialog() {
 	    let dialogRef = this.dialog.open(PasswordDialog);
 	    dialogRef.afterClosed().subscribe(result => {
-	    	this.tokenManagerService.store(result.token, result.loggedIn)
+	    	this.tokenManagerService.store(result.token, result.loggedIn, result.status);
 	    	if (!(result.token == '' || result.token == null)) {
 	    		this.admin = true;
 	    		this.who = result.loggedIn;		
+	    		this.status = result.status;
 	    	}
  	    });
 	}
@@ -152,7 +155,7 @@ export class DashboardComponent implements OnInit{
 	}
 
 	isOwner() {
-		return this.admin && this.who=="Aneesh";
+		return this.admin && this.status=="2";
 	}
 }
 
@@ -167,8 +170,8 @@ export class PasswordDialog {
 	checkPassword() : void {
 		this.authService.login(this.password).
 		then(data => {
-			if (data.loggedIn == "Aditya" || data.loggedIn == 'Jaidev' || data.loggedIn == "Vineeth" || data.loggedIn == "Aneesh" || data.loggedIn == "Shashank" || data.loggedIn == "Revanth") {
-				this.dialogRef.close({token: data.token, loggedIn: data.loggedIn});
+			if (data.status == "1" || data.status == "2") {
+				this.dialogRef.close({token: data.token, loggedIn: data.loggedIn, status: data.status});
 			} else {
 				this.incorrectPassword = true;
 			}

@@ -306,6 +306,7 @@ var DashboardComponent = (function () {
             this.admin = false;
         }
         this.who = this.tokenManagerService.retrieveMe();
+        this.status = this.tokenManagerService.retrieveStatus();
     };
     DashboardComponent.prototype.setSongs = function (data) {
         var _this = this;
@@ -339,10 +340,11 @@ var DashboardComponent = (function () {
         var _this = this;
         var dialogRef = this.dialog.open(PasswordDialog);
         dialogRef.afterClosed().subscribe(function (result) {
-            _this.tokenManagerService.store(result.token, result.loggedIn);
+            _this.tokenManagerService.store(result.token, result.loggedIn, result.status);
             if (!(result.token == '' || result.token == null)) {
                 _this.admin = true;
                 _this.who = result.loggedIn;
+                _this.status = result.status;
             }
         });
     };
@@ -401,7 +403,7 @@ var DashboardComponent = (function () {
         this.songsService.getRemovedSongs().then(function (data) { _this.setDels(data); }).catch(function (err) { return console.log(err); });
     };
     DashboardComponent.prototype.isOwner = function () {
-        return this.admin && this.who == "Aneesh";
+        return this.admin && this.status == "2";
     };
     return DashboardComponent;
 }());
@@ -424,8 +426,8 @@ var PasswordDialog = (function () {
         var _this = this;
         this.authService.login(this.password).
             then(function (data) {
-            if (data.loggedIn == "Aditya" || data.loggedIn == 'Jaidev' || data.loggedIn == "Vineeth" || data.loggedIn == "Aneesh" || data.loggedIn == "Shashank" || data.loggedIn == "Revanth") {
-                _this.dialogRef.close({ token: data.token, loggedIn: data.loggedIn });
+            if (data.status == "1" || data.status == "2") {
+                _this.dialogRef.close({ token: data.token, loggedIn: data.loggedIn, status: data.status });
             }
             else {
                 _this.incorrectPassword = true;
@@ -622,10 +624,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var TokenManagerService = (function () {
     function TokenManagerService() {
     }
-    TokenManagerService.prototype.store = function (content, who) {
+    TokenManagerService.prototype.store = function (content, who, status) {
         localStorage.setItem("token", content);
         localStorage.setItem("time", Date.now() + '');
         localStorage.setItem("who", who);
+        localStorage.setItem("status", status);
     };
     TokenManagerService.prototype.retrieveToken = function () {
         var currentTime = Date.now;
@@ -639,6 +642,9 @@ var TokenManagerService = (function () {
     };
     TokenManagerService.prototype.retrieveMe = function () {
         return localStorage.getItem("who");
+    };
+    TokenManagerService.prototype.retrieveStatus = function () {
+        return localStorage.getItem("status");
     };
     return TokenManagerService;
 }());

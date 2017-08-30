@@ -6,10 +6,11 @@ export class TokenManagerService {
   constructor() { }
 
 
-	public store(content : string, who: string) {
+	public store(content : string, who: string, status: string) {
 	    localStorage.setItem("token", content);
 	    localStorage.setItem("time", Date.now()+'');
 	    localStorage.setItem("who", who);
+	    localStorage.setItem("status", status);
 	}
 
 	public retrieveToken() {
@@ -25,6 +26,10 @@ export class TokenManagerService {
 
 	public retrieveMe() {
 		return localStorage.getItem("who");
+	}
+
+	public retrieveStatus() {
+		return localStorage.getItem("status");
 	}
 
 }
