@@ -82,30 +82,25 @@ getPlaylist = () => {
 
 getAccessToken();
 
-/* GET home page. */
 router.post('/login', (req, res, next) => {
     var pwd = req.body.pwd;
     
-    if (pwd == config.ADITYA_PASSWORD) {
-    	var token = jwt.sign({admin: "1"}, config.SECRET_KEY, {expiresIn: "1h"});
-    	res.json({loggedIn: "Aditya", token: token});
-    } else if (pwd == config.SUPER_PASSWORD) {
+    if (pwd == config.SUPER_ADMIN.PASSWORD) {
     	 var token = jwt.sign({admin: "2"}, config.SECRET_KEY, {expiresIn: "1h"});
-    	 res.json({loggedIn: "Aneesh", token: token});
-    } else if (pwd == config.REVANTH_PASSWORD) {
-    	 var token = jwt.sign({admin: "1"}, config.SECRET_KEY, {expiresIn: "1h"});
-    	 res.json({loggedIn: "Revanth", token: token});
-    } else if (pwd == config.VINEETH_PASSWORD) {
-    	 var token = jwt.sign({admin: "1"}, config.SECRET_KEY, {expiresIn: "1h"});
-    	 res.json({loggedIn: "Vineeth", token: token});
-    } else if (pwd == config.SHASHANK_PASSWORD) {
-    	 var token = jwt.sign({admin: "1"}, config.SECRET_KEY, {expiresIn: "1h"});
-    	 res.json({loggedIn: "Shashank", token: token});
-    } else if (pwd == config.JAIDEV_PASSWORD) {
-    	 var token = jwt.sign({admin: "1"}, config.SECRET_KEY, {expiresIn: "1h"});
-    	 res.json({loggedIn: "Jaidev", token: token});
+    	 res.json({loggedIn: config.SUPER_ADMIN.NAME, token: token, status: "2"});
     } else {
-    	res.json({loggedIn: "0", token: ''});
+    	var found = false;
+    	for (var i = 0; i < config.ADMINS.length; i++) {
+    		if (config.ADMINS[i].PASSWORD == pwd) {
+    			found = true;
+    			var token = jwt.sign({admin: "1"}, config.SECRET_KEY, {expiresIn: "1h"});
+    			res.json({loggedIn: config.ADMINS[i].NAME, token: token, status: "1"});
+    			break;
+    		}
+    	}
+    	if (!found) {
+    		res.json({loggedIn: "0", token: '', status: "0"});
+    	}
     }
 });
 
