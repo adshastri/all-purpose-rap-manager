@@ -1,6 +1,9 @@
 var express = require('express');
-
-var CONFIG = JSON.parse(process.env.CONFIG) || require('./config.js');
+if (process.env.CONFIG) {
+	var CONFIG = JSON.parse(process.env.CONFIG);
+} else {
+	var CONFIG = require('./config.js');
+}
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');

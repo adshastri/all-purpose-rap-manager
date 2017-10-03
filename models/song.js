@@ -1,5 +1,11 @@
 mongoose = require('mongoose')
-var config = JSON.parse(process.env.CONFIG) || require('./config.js');
+if (process.env.CONFIG) {
+	var config = JSON.parse(process.env.CONFIG);
+} else {
+	var config = require('../config.js');
+}
+
+console.log(config.ADMINS.length + 1)
 
 const songSchema = mongoose.Schema({
 	spotifyid: String,
@@ -95,16 +101,16 @@ songSchema.statics.checkForTotal = function(id, way) {
 	this.find({spotifyid: id}, function(err, result) {
 		if (way == "plus") {
 			var tot = result[0].approvals.length + result[0].nonapprovals.length;
-			if (result[0].approvals.length >= config.ADMINS.length/2) {
+			if (result[0].approvals.length >= (config.ADMINS.length+1)/2) {
 				S.update({spotifyid: id}, {$set: {status: "2", approvals: [], nonapprovals: []}}).exec();
-			} else if (result[0].nonapprovals.length >= (config.ADMINS.length/2)+1 || tot == config.ADMINS.length) {
+			} else if (result[0].nonapprovals.length >= ((config.ADMINS.length+1)/2)+1 || tot == config.ADMINS.length+1) {
 				S.remove({spotifyid: id}, function(err, result) {});
 			} 
 		} else {
 			var tot = result[0].disapprovals.length + result[0].nondisapprovals.length;
-			if (result[0].disapprovals.length >= config.ADMINS.length/2) {
+			if (result[0].disapprovals.length >= (config.ADMINS.length+1)/2) {
 				S.update({spotifyid: id}, {$set: {status: "5", approvals: [], nonapprovals: []}}).exec();
-			} else if (result[0].nondisapprovals.length >= (config.ADMINS.length/2)+1 || tot == config.ADMINS.length) {
+			} else if (result[0].nondisapprovals.length >= ((config.ADMINS.length+1)/2)+1 || tot == (config.ADMINS.length+1)) {
 				S.update({spotifyid: id}, {$set: {status: "3", approvals: [], nonapprovals: []}}).exec();
 			}
 		}

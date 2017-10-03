@@ -6,7 +6,11 @@ var Song = require('../models/song');
 var jwt = require('jsonwebtoken');
 var request = require('request');
 
-var config = JSON.parse(process.env.CONFIG) || require('./config.js');
+if (process.env.CONFIG) {
+	var config = JSON.parse(process.env.CONFIG);
+} else {
+	var config = require('../config.js');
+}
 
 var ACCESS_TOKEN = '';
 var PLAYLIST;
